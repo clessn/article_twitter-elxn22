@@ -100,6 +100,9 @@ CleanDataParty <- party_tweets %>%
 
 tweets_df <- rbind(CleanDataChefs, CleanDataParty)
 
+tweets_caq <- tweets_df %>% 
+  filter(metadata.twitterHandle %in% c("francoislegault", "coalitionavenir"))
+
 #### Begin the functions for topic-modeling ####
 
 library(tm)
@@ -114,6 +117,26 @@ twittercorpus <- tm_map(twittercorpus, removeNumbers)
 twittercorpus <- tm_map(twittercorpus, removeWords, french_stopwords)
 
 dtm_twitter <- DocumentTermMatrix(twittercorpus)
+dtm_twitter
+
+dtm_matrix <- as.matrix(dtm_twitter)
+
+lda_model <- LDA(dtm_matrix, k = 5)
+
+terms(lda_model, 10)
+
+
+#### test CAQ ####
+
+french_stopwords <- stopwords("fr")
+
+caqcorpus <- Corpus(VectorSource(tweets_caq$data.text))
+caqcorpus <- tm_map(caqcorpus, content_transformer(tolower))
+caqcorpus <- tm_map(caqcorpus, removePunctuation)
+caqcorpus <- tm_map(caqcorpus, removeNumbers)
+caqcorpus <- tm_map(caqcorpus, removeWords, french_stopwords)
+
+dtm_twitter <- DocumentTermMatrix(caqcorpus)
 dtm_twitter
 
 dtm_matrix <- as.matrix(dtm_twitter)

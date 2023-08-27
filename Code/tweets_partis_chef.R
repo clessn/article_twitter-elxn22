@@ -1,4 +1,5 @@
 library(tidyverse)
+library(tidytext)
 
 
 
@@ -95,12 +96,34 @@ CleanDataParty <- party_tweets %>%
                                        "@LiberalQuebec", "@partiquebecois",
                                        "@PconservateurQc"))
 
+### Bind the dataframes to create data for topic modeling ###
 
-#### Code for topic modelling ####
+tweets_df <- rbind(CleanDataChefs, CleanDataParty)
 
-  
-  
-  
+#### Begin the functions for topic-modeling ####
+
+library(tm)
+
+
+french_stopwords <- stopwords("fr")
+
+twittercorpus <- Corpus(VectorSource(tweets_df$data.text))
+twittercorpus <- tm_map(twittercorpus, content_transformer(tolower))
+twittercorpus <- tm_map(twittercorpus, removePunctuation)
+twittercorpus <- tm_map(twittercorpus, removeNumbers)
+twittercorpus <- tm_map(twittercorpus, removeWords, french_stopwords)
+
+dtm_twitter <- DocumentTermMatrix(twittercorpus)
+dtm_twitter
+
+dtm_matrix <- as.matrix(dtm_twitter)
+
+lda_model <- LDA(dtm_matrix, k = 5)
+
+terms(lda_model, 10)
+
+
+
   
 
 

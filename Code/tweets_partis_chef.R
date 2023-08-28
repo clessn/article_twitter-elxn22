@@ -100,28 +100,41 @@ CleanDataParty <- party_tweets %>%
 
 tweets_df <- rbind(CleanDataChefs, CleanDataParty)
 
+tweets_noise <- gsub("[^A-Za-z]", " ", tweets_df)
+
 tweets_caq <- tweets_df %>% 
   filter(metadata.twitterHandle %in% c("francoislegault", "coalitionavenir"))
 
 #### Begin the functions for topic-modeling ####
 
 library(tm)
+library(qdap)
 
 
 french_stopwords <- stopwords("fr")
+custom_stop <- c("plus", "ça", "comme", "faire", "gens", "tous", "matin",
+                 "fait", "ans", "aujoud'hui", "’", "merci", "tout", "grand", 
+                 "jour", "campagne", "cest", "aujourdhui", "québec", "être",
+                 "candidate", "candidat", "candidats", "a", "depuis", "aussi",
+                 "veut", "soir", "propose", "polqc", "toutes", "ceux", "celles",
+                 "and", "équipe")
 
 twittercorpus <- Corpus(VectorSource(tweets_df$data.text))
-twittercorpus <- tm_map(twittercorpus, content_transformer(tolower))
+twittercorpus <- tm_map(twittercorpus, tolower)
 twittercorpus <- tm_map(twittercorpus, removePunctuation)
 twittercorpus <- tm_map(twittercorpus, removeNumbers)
-twittercorpus <- tm_map(twittercorpus, removeWords, french_stopwords)
+twittercorpus <- tm_map(twittercorpus, removeWords, stopwords("fr"))
+twittercorpus <- tm_map(twittercorpus, stripWhitespace)
+twittercorpus <- tm_map(twittercorpus, removeWords, custom_stop)
+
+
 
 dtm_twitter <- DocumentTermMatrix(twittercorpus)
 dtm_twitter
 
 dtm_matrix <- as.matrix(dtm_twitter)
 
-lda_model <- LDA(dtm_matrix, k = 5)
+lda_model <- LDA(dtm_matrix, k = 10)
 
 terms(lda_model, 10)
 

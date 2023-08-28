@@ -125,6 +125,26 @@ lda_model <- LDA(dtm_matrix, k = 5)
 
 terms(lda_model, 10)
 
+#### test tidytext ####
+
+library(tidytext)
+library(topicmodels)
+tweet_topics <- tidy(lda_model, matrix = "beta")
+tweet_topics
+
+tweet_top_terms <- tweet_topics %>% 
+  group_by(topic) %>% 
+  top_n(10, beta) %>% 
+  ungroup() %>% 
+  arrange(topic, -beta)
+
+tweet_top_terms %>% 
+  mutate(term = reorder(term, beta)) %>% 
+  ggplot(aes(term, beta, fill = factor(topic))) +
+  geom_col(show.legend = FALSE) +
+  facet_wrap(~ topic, scales = "free") +
+  coord_flip()
+
 
 #### test CAQ ####
 

@@ -29,7 +29,7 @@ library(tidyverse)
 # library(pdftools)
 
 # Établir le chemin d'arborescence
-path <- setwd("/Users/adrien/Library/CloudStorage/Dropbox/Travail/Universite_Laval/publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
+path <- setwd("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
 
 ########################################################################################################### ##
 ################################################### Créer les txt ############################################
@@ -97,7 +97,7 @@ result <- replaceRange(result, 'Copyright', 'All Rights Reserved.')
 
 
 # on vérifie un résultat
-# result[[1]]
+result[[1]]
 
 
 # Créer des fonctions qui utilise les regex pour continuer le nettoyage

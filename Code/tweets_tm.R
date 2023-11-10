@@ -2,10 +2,19 @@ library(tidyverse)
 library(tm)
 library(topicmodels)
 library(tidytext)
+remotes::install_github("clessn/clessnverse")
+library(clessnverse)
+
 
 tweets_df <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/tweetstext.rds")
 
+run_dictionary(
+  data.frame(colnames(attitude)),
+  text = colnames(attitude),
+  dictionary = quanteda::data_dictionary_LSD2015
+) %>% head()
 
+run_dictionary(tweets_df, data.text, dictionary, verbose = TRUE)
 
 #tweets_noise <- gsub("[^A-Za-z]", " ", tweets_df)
 
@@ -57,7 +66,7 @@ stopwords_custom <-
     "jour", "campagne", "cest", "aujourdhui", "québec", "être",
     "candidate", "candidat", "candidats", "a", "depuis", "aussi",
     "veut", "soir", "propose", "polqc", "toutes", "ceux", "celles",
-    "and", "équipe"
+    "and", "équipe", "québécois"
   )
 # Autres
 #"x", "h", "s", "t", "th", "à") # ajouter d'autres mots
@@ -68,8 +77,9 @@ stopwords_custom <-
 clean_tweets <- function(corpus){
   corpus <- tm::tm_map(corpus, content_transformer(tolower))
   corpus <- tm::tm_map(corpus, removeWords, stopwords("english"))
-  corpus <- tm::tm_map(corpus, removeWords, stopwords("french"))
+  corpus <- tm::tm_map(corpus, removeWords, stopwords("fr"))
   corpus <- tm::tm_map(corpus, removeWords, words = stopwords_custom)
+  corpus <- tm::tm_map(corpus, removeNumbers)
   corpus <- tm::tm_map(corpus, removePunctuation, preserve_intra_word_dashes = T)
   #corpus <- tm::tm_map(corpus, removeNumbers)
   #corpus <- tm::tm_map(corpus, stemDocument) # stemming SEULEMENT pour le topic modeling

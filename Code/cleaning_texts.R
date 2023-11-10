@@ -198,99 +198,26 @@ df[,2] <- data.frame(matrix(unlist(document_path),
 
 # Avec une loop, renvoyer chaque txt nettoyé dans son dossier!
 for(i in 1:length(document_list)) {
-  write.table(df[i, 1],  paste0(path, "/", df[i, 2]))
+  write.table(df[i, 1],  paste0(path, "/_SharedFolder_article_twitter-elxn22/", df[i, 2]))
 }
 
 
 ########################################################################################################### ##
-############################################# Faire la traduction ############################################
+################################################# Charger les txt ############################################
 ########################################################################################################### ##
-
-# API Key pour Google translate. *****Attention à rouler pour rien, c'est payant*****
-# 20$/ millions de caractères
-#gl_auth("memoire2020-94b4944b078b.json")
 
 # Charger tous les txt français nettoyés
-LaPresse <- readtext(paste0(path, "/texts/lapresse/")) %>%
+LaPresse <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/lapresse/")) %>%
    filter(grepl(".txt", doc_id))
 
-# Pour faire des tests sans l'ensemble des textes
-# LaPresse1 <- LaPresse[1:2,]
-LeDevoir <- readtext(paste0(path, "/texts/ledevoir/")) %>%
+LeDevoir <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/ledevoir/")) %>%
    filter(grepl(".txt", doc_id))
 
-RadioCan <- readtext(paste0(path, "/texts/radiocanada/")) %>%
-   filter(grepl(".txt", doc_id))
-JdeM <- readtext(paste0(path, "/texts/jdem/")) %>%
+RadioCan <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/radiocanada/")) %>%
    filter(grepl(".txt", doc_id))
 
-# Voir le nombre de characters
-
-nchar(LaPresse) # 8 105 647
-nchar(LaPresse2) # 16 526 685
-nchar(LeDevoir) # 10 335 066
-nchar(RadioCan) # 5 439 955
-nchar(JdeM)    # 10 030 105
-# total        # 50 437 458 = 1000$
-
-for (row in 32:nrow(LeDevoir))
-#for (row in 1:1)
-{
-  text <- LeDevoir[row, "text"]
-  print(nchar(text))
-  print(paste('begin translation of line', row))
-  translated_text <- gl_translate(text, target = "en")
-  print('end of translation')
-  LeDevoir[row, "translation"] <- translated_text
-  Sys.sleep(60)
-}
-
-
-# Traduire les textes
-# LaPresse1$text2 <- gl_translate(LaPresse1$text, target = "en")
- LeDevoir$text2 <- gl_translate(LeDevoir$text, target = "en")
-# RadioCan$text2 <- gl_translate(RadioCan$text, target = "en")
-# JdeM$text2 <- gl_translate(JdeM$text, target = "en")
-
-# Recréer un beau df
-#LaPresse_trad <- LaPresse1$text2
-#LeDevoir_trad <- LeDevoir$text2
-#RadioCan_trad <- RadioCan$text2
-#JdeM_trad <- JdeM$text2
-
-### Recréer variable doc_id
-# LaPresse_trad$doc_id <- NA
-# LaPresse_trad$doc_id <- LaPresse1$doc_id
-# LaPresse_trad <- LaPresse_trad %>%
-#    select(doc_id, translatedText) %>%
-#    rename(text = translatedText)
-#
-# LeDevoir_trad$doc_id <- NA
-# LeDevoir_trad$doc_id <- LeDevoir$doc_id
-# LeDevoir_trad <- LeDevoir_trad %>%
-#   select(doc_id, translatedText) %>%
-#   rename(text = translatedText)
-#
-# RadioCan_trad$doc_id <- NA
-# RadioCan_trad$doc_id <- RadioCan$doc_id
-# RadioCan_trad <- RadioCan_trad %>%
-#   select(doc_id, translatedText) %>%
-#   rename(text = translatedText)
-#
-# JdeM_trad$doc_id <- NA
-# JdeM_trad$doc_id <- JdeM$doc_id
-# JdeM_trad <- JdeM_trad %>%
-#   select(doc_id, translatedText) %>%
-#   rename(text = translatedText)
-
-
-# Charger tous les txt anglais nettoyés
-CBC <- readtext(paste0(path, "/texts/Anglo_Can/CBC/")) %>%
-  filter(grepl(".txt", doc_id))
-TStar <- readtext(paste0(path, "/texts/Anglo_Can/TStar/")) %>%
-  filter(grepl(".txt", doc_id))
-#Globe <- readtext(paste0(path, "/texts/Anglo_Can/Globe/"))
-#NPost <- readtext(paste0(path, "/texts/Anglo_Can/NPost/"))
+JdeM <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/jdem/")) %>%
+   filter(grepl(".txt", doc_id))
 
 
 ########################################################################################################### ##
@@ -331,13 +258,16 @@ MediaClean <- LaPresse %>%
                  ifelse(grepl("11.pdf.txt$", doc_id), "11",
                  ifelse(grepl("12.pdf.txt$", doc_id), "12",
                  ifelse(grepl("13.pdf.txt$", doc_id), "13",
+                 ifelse(grepl("13_2.pdf.txt$", doc_id), "13",
                  ifelse(grepl("14.pdf.txt$", doc_id), "14",
                  ifelse(grepl("15.pdf.txt$", doc_id), "15",
                  ifelse(grepl("16.pdf.txt$", doc_id), "16",
+                 ifelse(grepl("16_2.pdf.txt$", doc_id), "16",
                  ifelse(grepl("17.pdf.txt$", doc_id), "17",
                  ifelse(grepl("18.pdf.txt$", doc_id), "18",
                  ifelse(grepl("19.pdf.txt$", doc_id), "19",
                  ifelse(grepl("20.pdf.txt$", doc_id), "20",
+                 ifelse(grepl("20_2.pdf.txt$", doc_id), "20",
                  ifelse(grepl("21.pdf.txt$", doc_id), "21",
                  ifelse(grepl("22.pdf.txt$", doc_id), "22",
                  ifelse(grepl("23.pdf.txt$", doc_id), "23",
@@ -348,7 +278,7 @@ MediaClean <- LaPresse %>%
                  ifelse(grepl("28.pdf.txt$", doc_id), "28",
                  ifelse(grepl("29.pdf.txt$", doc_id), "29",
                  ifelse(grepl("30.pdf.txt$", doc_id), "30",
-                 ifelse(grepl("31.pdf.txt$", doc_id), "31", "Error!!"))))))))))))))))))))))))))))))),
+                 ifelse(grepl("31.pdf.txt$", doc_id), "31", "Error!!")))))))))))))))))))))))))))))))))),
           doc_id = paste0(day, "-", month))
 
 ########################################################################################################### ##
@@ -356,7 +286,7 @@ MediaClean <- LaPresse %>%
 ########################################################################################################### ##
 
 # Enregistrer le csv
-write.csv(MediaClean, file = "MediaClean.csv")
+write.csv(MediaClean, file = "Data/MediaClean.csv")
 
 ########################################################################################################### ##
 ####################################################### FIN ##################################################

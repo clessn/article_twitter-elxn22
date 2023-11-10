@@ -285,8 +285,10 @@ MediaClean <- LaPresse %>%
 ################################################## Enregistrer ###############################################
 ########################################################################################################### ##
 
+MediaClean <- read.csv("/Users/adrien/Library/CloudStorage/Dropbox/Travail/Universite_Laval/publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/MediaClean.csv")
+
 # Enregistrer le csv
-write.csv(MediaClean, file = "Data/MediaClean.csv")
+saveRDS(MediaClean, file = "_SharedFolder_article_twitter-elxn22/Data/MediaClean.rds")
 
 ########################################################################################################### ##
 ####################################################### FIN ##################################################

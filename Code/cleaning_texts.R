@@ -29,7 +29,7 @@ library(tidyverse)
 # library(pdftools)
 
 # Établir le chemin d'arborescence
-path <- setwd("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
+path <- setwd("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
 
 ########################################################################################################### ##
 ################################################### Créer les txt ############################################
@@ -75,7 +75,7 @@ replaceRange <- function(original, before, after, replaceWith = '')
   return(gsub(regex, replaceWith, original))
 }
 
-document_texts[[1]]
+document_texts[[120]]
 
 # On utilise la fonction pour enlever des txt les passages qui ne sont pas des textes médiatiques
 # On met le début du passage entre les premiers ' ', et la fin entre les 2e ' '
@@ -97,7 +97,7 @@ result <- replaceRange(result, 'Copyright', 'All Rights Reserved.')
 
 
 # on vérifie un résultat
-result[[1]]
+result[[120]]
 
 
 # Créer des fonctions qui utilise les regex pour continuer le nettoyage

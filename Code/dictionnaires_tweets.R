@@ -44,6 +44,95 @@ full_df$data.text[[59]]
 
 saveRDS(full_df, "_SharedFolder_article_twitter-elxn22/Data/dict_tweets.rds")
 
+#####
+#rendre les données de dictionnaires en binaire
+####
+
+full_df$macroeconomics[full_df$macroeconomics >= 1] <- 1
+full_df$macroeconomics[full_df$macroeconomics == 0] <- 0
+
+full_df$civil_rights[full_df$civil_rights >= 1] <- 1
+full_df$civil_rights[full_df$civil_rights == 0] <- 0
+
+full_df$healthcare[full_df$healthcare >= 1] <- 1
+full_df$healthcare[full_df$healthcare == 0] <- 0
+
+full_df$agriculture[full_df$agriculture >= 1] <- 1
+full_df$agriculture[full_df$agriculture == 0] <- 0
+
+full_df$forestry[full_df$forestry >= 1] <- 1
+full_df$forestry[full_df$forestry == 0] <- 0
+
+full_df$labour[full_df$labour >= 1] <- 1
+full_df$labour[full_df$labour == 0] <- 0
+
+full_df$immigration[full_df$immigration >= 1] <- 1
+full_df$immigration[full_df$immigration == 0] <- 0
+
+full_df$education[full_df$education >= 1] <- 1
+full_df$education[full_df$education == 0] <- 0
+
+full_df$environment[full_df$environment >= 1] <- 1
+full_df$environment[full_df$environment == 0] <- 0
+
+full_df$energy[full_df$energy >= 1] <- 1
+full_df$energy[full_df$energy == 0] <- 0
+
+full_df$fisheries[full_df$fisheries >= 1] <- 1
+full_df$fisheries[full_df$fisheries == 0] <- 0
+
+full_df$transportation[full_df$transportation >= 1] <- 1
+full_df$transportation[full_df$transportation == 0] <- 0
+
+full_df$crime[full_df$crime >= 1] <- 1
+full_df$crime[full_df$crime == 0] <- 0
+
+full_df$social_welfare[full_df$social_welfare >= 1] <- 1
+full_df$social_welfare[full_df$social_welfare == 0] <- 0
+
+full_df$housing[full_df$housing >= 1] <- 1
+full_df$housing[full_df$housing == 0] <- 0
+
+full_df$finance[full_df$finance >= 1] <- 1
+full_df$finance[full_df$finance == 0] <- 0
+
+full_df$defence[full_df$defence >= 1] <- 1
+full_df$defence[full_df$defence == 0] <- 0
+
+full_df$sstc[full_df$sstc >= 1] <- 1
+full_df$sstc[full_df$sstc == 0] <- 0
+
+full_df$foreign_trade[full_df$foreign_trade >=1] <- 1
+full_df$foreign_trade[full_df$foreign_trade ==0] <- 0
+
+full_df$intl_affairs[full_df$intl_affairs >=1] <- 1
+full_df$intl_affairs[full_df$intl_affairs ==0] <- 0
+
+full_df$government_ops[full_df$government_ops >=1] <- 1
+full_df$government_ops[full_df$government_ops ==0] <- 0
+
+full_df$`land-water-management`[full_df$`land-water-management` >= 1] <- 1
+full_df$`land-water-management`[full_df$`land-water-management` == 0] <- 0
+
+full_df$culture[full_df$culture >= 1] <- 1
+full_df$culture[full_df$culture == 0] <- 0
+
+full_df$prov_local[full_df$prov_local >= 1] <- 1
+full_df$prov_local[full_df$prov_local == 0] <- 0
+
+full_df$intergovernmental[full_df$intergovernmental >= 1] <- 1
+full_df$intergovernmental[full_df$intergovernmental == 0] <- 0
+
+full_df$constitutional_natl_unity[full_df$constitutional_natl_unity >= 1] <- 1
+full_df$constitutional_natl_unity[full_df$constitutional_natl_unity == 0] <- 0
+
+full_df$aboriginal[full_df$aboriginal >= 1] <- 1
+full_df$aboriginal[full_df$aboriginal == 0] <- 0
+
+full_df$religion[full_df$religion >= 1] <- 1
+full_df$religion[full_df$religion == 0] <- 0
+
+saveRDS(full_df, "_SharedFolder_article_twitter-elxn22/Data/binary_dict_tweets.rds")
 
 
 
@@ -51,6 +140,16 @@ saveRDS(full_df, "_SharedFolder_article_twitter-elxn22/Data/dict_tweets.rds")
 
 
 dictFr <- clessnverse::get_dictionary(topic="issues", lang = "fr", credentials=credentials)
+
+########
+#On essaie d'appliquer les dictionnaires aux textes médiatiques####
+#######
+
+tests_txt <- read_csv("_SharedFolder_article_twitter-elxn22/Data/MediaClean.csv")
+
+dict_test <- clessnverse::run_dictionary(data = tests_txt,
+                                           text = tests_txt$text,
+                                           dict = qdictFr)
 
 
 

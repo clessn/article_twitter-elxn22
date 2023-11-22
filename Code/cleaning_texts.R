@@ -31,6 +31,7 @@ library(tidyverse)
 # Établir le chemin d'arborescence
 path <- setwd("/Users/adrien/Library/CloudStorage/Dropbox/Travail/Universite_Laval/publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
 
+
 ########################################################################################################### ##
 ################################################### Créer les txt ############################################
 ########################################################################################################### ##
@@ -77,6 +78,7 @@ replaceRange <- function(original, before, after, replaceWith = '')
 
 document_texts[[28]]
 
+
 # On utilise la fonction pour enlever des txt les passages qui ne sont pas des textes médiatiques
 # On met le début du passage entre les premiers ' ', et la fin entre les 2e ' '
 result <- replaceRange(document_texts, 'Documents sauvegardés', 'CEDROM-SNi Inc. ')
@@ -98,6 +100,7 @@ result <- replaceRange(result, '©', 'visualisation personnelle et temporaire.')
 
 # on vérifie un résultat
 result[[28]]
+
 
 
 # Créer des fonctions qui utilise les regex pour continuer le nettoyage

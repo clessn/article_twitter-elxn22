@@ -25,14 +25,31 @@ dictEn <- quanteda::dictionary(as.list(dict_listEn))
 dict_listFr <- list()
 for (c in unique(dict_fr$category)) {
   dict_listFr[[c]] <- dict_fr$item[dict_fr$category == c]
+  
 }
 
 
-qdictFr <- quanteda::dictionary(as.list(dict_listFr))
+###############
+#### Dictionnaire pimpé ####
+###############
+
+dict_pimp <- utils::read.csv2("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/dictionnaires/dict_final.csv", encoding = "UTF-8")
+
+dict_listFinal <- list()
+for (c in unique(dict_pimp$category)) {
+  dict_listFinal[[c]] <- dict_pimp$item[dict_pimp$category == c]
+  
+}
+
+dictFinal <- quanteda::dictionary(as.list(dict_listFinal))
+
+
+
+qdictFinal <- quanteda::dictionary(as.list(dict_listFinal))
 
 ExtractDict <- clessnverse::run_dictionary(data = tweets_df,
                                            text = tweets_df$data.text,
-                                           dict = qdictFr)
+                                           dict = qdictFinal)
 
 
 
@@ -40,7 +57,7 @@ ExtractDict <- clessnverse::run_dictionary(data = tweets_df,
 
 full_df <- cbind(tweets_df, ExtractDict)
 
-full_df$data.text[[59]]
+full_df$data.text[[1149]]
 
 saveRDS(full_df, "_SharedFolder_article_twitter-elxn22/Data/dict_tweets.rds")
 

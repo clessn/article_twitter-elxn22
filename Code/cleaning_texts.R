@@ -29,7 +29,8 @@ library(tidyverse)
 # library(pdftools)
 
 # Établir le chemin d'arborescence
-path <- setwd("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
+path <- setwd("/Users/adrien/Library/CloudStorage/Dropbox/Travail/Universite_Laval/publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22")
+
 
 ########################################################################################################### ##
 ################################################### Créer les txt ############################################
@@ -75,29 +76,31 @@ replaceRange <- function(original, before, after, replaceWith = '')
   return(gsub(regex, replaceWith, original))
 }
 
-document_texts[[120]]
+document_texts[[28]]
+
 
 # On utilise la fonction pour enlever des txt les passages qui ne sont pas des textes médiatiques
 # On met le début du passage entre les premiers ' ', et la fin entre les 2e ' '
 result <- replaceRange(document_texts, 'Documents sauvegardés', 'CEDROM-SNi Inc. ')
-result <- replaceRange(result, '\fSommaire', 'Nom de ')
-result <- replaceRange(result, 'la source', 'words ')
-result <- replaceRange(result, 'la source', 'mots ')
-result <- replaceRange(result, '©', '\f')
-result <- replaceRange(result, 'Cet article est paru dans', 'Nom de')
-result <- replaceRange(result, 'Cet article est paru dans', '\f')
-#result <- replaceRange(result, 'Image Credit:', ') ')
-#result <- replaceRange(result, 'With files from', 'About CBC News')
-result <- replaceRange(result, 'LES DROITS D', 'FAÇON QUE CE SOIT. ')
-result <- replaceRange(result, 'Le présent document est protégé', 'fins de visualisation personnelle et temporaire.')
-result <- replaceRange(result, 'news·', '·TTA·')
-result <- replaceRange(result, 'Copyright', 'All Rights Reserved.')
+#result <- replaceRange(result, '\fSommaire \f', '\f')
+result <- replaceRange(result, 'news·', '\f')
+#result <- replaceRange(result, 'la source', 'mots ')
+result <- replaceRange(result, '©', 'visualisation personnelle et temporaire.')
+# result <- replaceRange(result, 'Cet article est paru dans', 'Nom de')
+# result <- replaceRange(result, 'Cet article est paru dans', '\f')
+# #result <- replaceRange(result, 'Image Credit:', ') ')
+# #result <- replaceRange(result, 'With files from', 'About CBC News')
+# result <- replaceRange(result, 'LES DROITS D', 'FAÇON QUE CE SOIT. ')
+# result <- replaceRange(result, 'Le présent document est protégé', 'fins de visualisation personnelle et temporaire.')
+# result <- replaceRange(result, 'news·', '·TTA·')
+# result <- replaceRange(result, 'Copyright', 'All Rights Reserved.')
 
 
 
 
 # on vérifie un résultat
-result[[120]]
+result[[28]]
+
 
 
 # Créer des fonctions qui utilise les regex pour continuer le nettoyage
@@ -114,7 +117,15 @@ removeCollab <- function(x) str_replace_all(x, fixed("Collaboration spéciale"),
 removeJdeM <- function(x) str_replace_all(x, fixed("Journal de Montréal"), replacement = "")
 removeJdeQ <- function(x) str_replace_all(x, fixed("Journal de Québec"), replacement = "")
 removeQMI <- function(x) str_replace_all(x, fixed("Agence QMI"), replacement = "")
-removeLaPresse <- function(x) str_replace_all(x, fixed("La Presse"), replacement = "")
+removePC <- function(x) str_replace_all(x, fixed("LA PRESSE CANADIENNE"), replacement = "")
+removePC2 <- function(x) str_replace_all(x, fixed("La Presse canadienne"), replacement = "")
+removeLaPresse1 <- function(x) str_replace_all(x, fixed("La Presse"), replacement = "")
+removeLaPresse2 <- function(x) str_replace_all(x, fixed("ARCHIVES LA PRESSE"), replacement = "")
+removeLaPresse3 <- function(x) str_replace_all(x, fixed("LA PRESSE"), replacement = "")
+removeLaPresse4 <- function(x) str_replace_all(x, fixed("PHOTOMONTAGE LAPRESSE "), replacement = "")
+removeLaPresse5 <- function(x) str_replace_all(x, fixed("PHOTO FOURNIE PAR "), replacement = "")
+removeTVA <- function(x) str_replace_all(x, fixed("TVA"), replacement = "")
+removeLCN <- function(x) str_replace_all(x, fixed("LCN"), replacement = "")
 removeLeDevoir <- function(x) str_replace_all(x, fixed("Le Devoir"), replacement = "")
 removeRadioCan <- function(x) str_replace_all(x, fixed("Radio-Canada"), replacement = "")
 removeTStar <- function(x) str_replace_all(x, fixed("Toronto Star"), replacement = "")
@@ -124,6 +135,7 @@ removeFiles <- function(x) str_replace_all(x, fixed("With files from"), replacem
 removeCP <- function(x) str_replace_all(x, fixed("Canadian Press"), replacement = "")
 removeCPMaj <- function(x) str_replace_all(x, fixed("CANADIAN PRESS"), replacement = "")
 removeAP <- function(x) str_replace_all(x, fixed("Associated Press"), replacement = "")
+removeAP2 <- function(x) str_replace_all(x, fixed("ASSOCIATED PRESS"), replacement = "")
 removeWeb <- function(x) str_replace_all(x, fixed("(web site)"), replacement = "")
 removeSites <- function(x) str_replace_all(x, fixed("site web"), replacement = "")
 removePhoto <- function(x) str_replace_all(x, fixed("file photo"), replacement = "")
@@ -138,6 +150,15 @@ removeBureauE <- function(x) str_replace_all(x, fixed("Bureau d'enquête"), repl
 removeResponsable <- function(x) str_replace_all(x, fixed("n'est aucunement responsable du contenu des sites externes"), replacement = "")
 removeTexteDe <- function(x) str_replace_all(x, fixed("Un texte de"), replacement = "")
 removeLireAussi <- function(x) str_replace_all(x, fixed("À lire aussi"), replacement = "")
+removeCollabspeciale <- function(x) str_replace_all(x, fixed("COLLABORATION SPÉCIALE"), replacement = "")
+removeCollab2 <- function(x) str_replace_all(x, fixed("Avec la collaboration de"), replacement = "")
+removeArchives <- function(x) str_replace_all(x, fixed("ARCHIVES"), replacement = "")
+removeParuDan2 <- function(x) str_replace_all(x, fixed("Cet article est paru dans"), replacement = "")
+removePhoto3 <- function(x) str_replace_all(x, fixed("(photo)"), replacement = "")
+removePhoto2 <- function(x) str_replace_all(x, fixed("PHOTO"), replacement = "")
+removeEncadre <- function(x) str_replace_all(x, fixed("Encadré(s) :"), replacement = "")
+removeVideo <- function(x) str_replace_all(x, fixed("À voir en vidéo"), replacement = "")
+
 
 
 # On applique nos fonctions
@@ -153,7 +174,15 @@ result <- lapply(result, removeCollab)
 result <- lapply(result, removeJdeM)
 result <- lapply(result, removeJdeQ)
 result <- lapply(result, removeQMI)
-result <- lapply(result, removeLaPresse)
+result <- lapply(result, removePC)
+result <- lapply(result, removePC2)
+result <- lapply(result, removeLaPresse1)
+result <- lapply(result, removeLaPresse2)
+result <- lapply(result, removeLaPresse3)
+result <- lapply(result, removeLaPresse4)
+result <- lapply(result, removeLaPresse5)
+result <- lapply(result, removeTVA)
+result <- lapply(result, removeLCN)
 result <- lapply(result, removeLeDevoir)
 result <- lapply(result, removeRadioCan)
 result <- lapply(result, removeTStar)
@@ -163,6 +192,7 @@ result <- lapply(result, removeFiles)
 result <- lapply(result, removeCP)
 result <- lapply(result, removeCPMaj)
 result <- lapply(result, removeAP)
+result <- lapply(result, removeAP2)
 result <- lapply(result, removeWeb)
 result <- lapply(result, removeSites)
 result <- lapply(result, removePhoto)
@@ -177,10 +207,17 @@ result <- lapply(result, removeBureauE)
 result <- lapply(result, removeResponsable)
 result <- lapply(result, removeTexteDe)
 result <- lapply(result, removeLireAussi)
-
+result <- lapply(result, removeCollabspeciale)
+result <- lapply(result, removeCollab2)
+result <- lapply(result, removeArchives)
+result <- lapply(result, removeParuDan2)
+result <- lapply(result, removePhoto2)
+result <- lapply(result, removePhoto3)
+result <- lapply(result, removeEncadre)
+result <- lapply(result, removeVideo)
 
 # On revérifie
-# result[[1]]
+result[[28]]
 
 ########################################################################################################### ##
 ######################################## Réenregistrer dans nos dossier ######################################
@@ -198,7 +235,7 @@ df[,2] <- data.frame(matrix(unlist(document_path),
 
 # Avec une loop, renvoyer chaque txt nettoyé dans son dossier!
 for(i in 1:length(document_list)) {
-  write.table(df[i, 1],  paste0(path, "/_SharedFolder_article_twitter-elxn22/", df[i, 2]))
+  write.table(df[i, 1],  paste0(path, "/", df[i, 2]))
 }
 
 
@@ -207,16 +244,16 @@ for(i in 1:length(document_list)) {
 ########################################################################################################### ##
 
 # Charger tous les txt français nettoyés
-LaPresse <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/lapresse/")) %>%
+LaPresse <- readtext(paste0(path, "/texts/lapresse/")) %>%
    filter(grepl(".txt", doc_id))
 
-LeDevoir <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/ledevoir/")) %>%
+LeDevoir <- readtext(paste0(path, "/texts/ledevoir/")) %>%
    filter(grepl(".txt", doc_id))
 
-RadioCan <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/radiocanada/")) %>%
+RadioCan <- readtext(paste0(path, "/texts/radiocanada/")) %>%
    filter(grepl(".txt", doc_id))
 
-JdeM <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/jdem/")) %>%
+JdeM <- readtext(paste0(path, "/texts/jdem/")) %>%
    filter(grepl(".txt", doc_id))
 
 
@@ -228,7 +265,7 @@ JdeM <- readtext(paste0(path, "/_SharedFolder_article_twitter-elxn22/texts/jdem/
 # MediaClean <- LaPresse_trad %>%
 # bind_rows(LaPresse2_trad, LeDevoir_trad, RadioCan_trad, JdeM_trad, CBC, TStar) %>%
 MediaClean <- LaPresse %>%
-  bind_rows(LeDevoir, RadioCan, JdeM) %>%
+  bind_rows(LeDevoir, RadioCan) %>%
   mutate(media = ifelse(grepl("^jdem_", doc_id), "JdeM",
                  ifelse(grepl("^lapresse_", doc_id), "LaPresse",
                  ifelse(grepl("^ledevoir_", doc_id), "LeDevoir",
@@ -285,10 +322,10 @@ MediaClean <- LaPresse %>%
 ################################################## Enregistrer ###############################################
 ########################################################################################################### ##
 
-MediaClean <- read.csv("/Users/adrien/Library/CloudStorage/Dropbox/Travail/Universite_Laval/publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/MediaClean.csv")
+#MediaClean <- read.csv("/Users/adrien/Library/CloudStorage/Dropbox/Travail/Universite_Laval/publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/MediaClean.csv")
 
 # Enregistrer le csv
-saveRDS(MediaClean, file = "_SharedFolder_article_twitter-elxn22/Data/MediaClean.rds")
+saveRDS(MediaClean, file = paste0(path, "/Data/MediaClean_", today(), ".rds"))
 
 ########################################################################################################### ##
 ####################################################### FIN ##################################################

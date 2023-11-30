@@ -3,9 +3,9 @@ library(clessnverse)
 
 credentials <- hublot::get_credentials( Sys.getenv("HUB3_URL"),  Sys.getenv("HUB3_USERNAME"),  Sys.getenv("HUB3_PASSWORD"))
 
-media_df <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/MediaClean_2023-11-21.rds")
+media_df <- readRDS("_SharedFolder_article_twitter-elxn22/Data/MediaClean_2023-11-21.rds")
 
-dict_pimp <- utils::read.csv2("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/dictionnaires/dict_final.csv", encoding = "UTF-8")
+dict_pimp <- utils::read.csv2("_SharedFolder_article_twitter-elxn22/dictionnaires/dict_final.csv", encoding = "UTF-8")
 
 dict_listFinal <- list()
 for (c in unique(dict_pimp$category)) {

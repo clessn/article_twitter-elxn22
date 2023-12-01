@@ -5,6 +5,8 @@ credentials <- hublot::get_credentials( Sys.getenv("HUB3_URL"),  Sys.getenv("HUB
 
 tweets_df <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/tweetstext.rds")
 
+media_df <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/MediaClean.rds")
+
 dict_df <- utils::read.csv2("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/dictionnaires/dict_issues.csv", encoding = "UTF-8")
 
 dict_en <- dict_df %>% 
@@ -28,6 +30,8 @@ for (c in unique(dict_fr$category)) {
   
 }
 
+dict_listFr <- quanteda::dictionary(as.list(dict_listFr))
+
 
 ###############
 #### Dictionnaire pimpé ####
@@ -50,6 +54,13 @@ qdictFinal <- quanteda::dictionary(as.list(dict_listFinal))
 ExtractDict <- clessnverse::run_dictionary(data = tweets_df,
                                            text = tweets_df$data.text,
                                            dict = qdictFinal)
+
+#####Médias####
+
+MediaDict <- clessnverse::run_dictionary(data = media_df,
+                                         text = media_df$text,
+                                         dict = qdictFinal)
+
 
 
 

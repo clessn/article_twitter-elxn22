@@ -244,16 +244,16 @@ for(i in 1:length(document_list)) {
 ########################################################################################################### ##
 
 # Charger tous les txt français nettoyés
-LaPresse <- readtext(paste0(path, "/texts/lapresse/")) %>%
+LaPresse <- readtext(paste0(path, "/textsclean/lapresse/")) %>%
    filter(grepl(".txt", doc_id))
 
-LeDevoir <- readtext(paste0(path, "/texts/ledevoir/")) %>%
+LeDevoir <- readtext(paste0(path, "/textsclean/ledevoir/")) %>%
    filter(grepl(".txt", doc_id))
 
-RadioCan <- readtext(paste0(path, "/texts/radiocanada/")) %>%
+RadioCan <- readtext(paste0(path, "/textsclean/radiocanada/")) %>%
    filter(grepl(".txt", doc_id))
 
-JdeM <- readtext(paste0(path, "/texts/jdem/")) %>%
+JdeM <- readtext(paste0(path, "/textsclean/jdem/")) %>%
    filter(grepl(".txt", doc_id))
 
 
@@ -265,7 +265,7 @@ JdeM <- readtext(paste0(path, "/texts/jdem/")) %>%
 # MediaClean <- LaPresse_trad %>%
 # bind_rows(LaPresse2_trad, LeDevoir_trad, RadioCan_trad, JdeM_trad, CBC, TStar) %>%
 MediaClean <- LaPresse %>%
-  bind_rows(LeDevoir, RadioCan) %>%
+  bind_rows(LeDevoir, RadioCan, JdeM) %>%
   mutate(media = ifelse(grepl("^jdem_", doc_id), "JdeM",
                  ifelse(grepl("^lapresse_", doc_id), "LaPresse",
                  ifelse(grepl("^ledevoir_", doc_id), "LeDevoir",

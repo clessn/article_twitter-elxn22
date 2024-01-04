@@ -96,14 +96,14 @@ politicians_tweets <- get_politicians_tweets("2022-08-01", "2022-11-01")
 #### Create a clean dataframe containing the relevant variables ####
 
 CleanDataChefs <- politicians_tweets %>% 
-  select(data.creationDate, data.creationTime, metadata.twitterHandle, data.text,
-         type, data.mentions) %>% 
+  select(data.creationDate, data.creationTime, data.likeCount, metadata.twitterHandle, 
+         data.retweetCount, data.text, type, data.mentions) %>% 
   filter(metadata.twitterHandle %in% c("francoislegault", "GNadeauDubois", 
                                        "PaulPlamondon", "E_Duhaime", "DomAnglade"))
 
 CleanDataParty <- party_tweets %>% 
-  select(data.creationDate, data.creationTime, metadata.twitterHandle, data.text, 
-         type, data.mentions) %>% 
+  select(data.creationDate, data.creationTime, data.likeCount, metadata.twitterHandle, 
+         data.retweetCount, data.text, type, data.mentions) %>% 
   filter(metadata.twitterHandle %in% c("@QuebecSolidaire", "@coalitionavenir", 
                                        "@LiberalQuebec", "@partiquebecois",
                                        "@PconservateurQc"))

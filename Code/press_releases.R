@@ -52,6 +52,8 @@ releases_full <- cbind(df_press_release, ReleaseDict)
 ########Save le RDS#####
 
 saveRDS(releases_full, "_SharedFolder_article_twitter-elxn22/Data/dict_releases.rds")
+
+press <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/william/dict_releases.rds")
   
   
   

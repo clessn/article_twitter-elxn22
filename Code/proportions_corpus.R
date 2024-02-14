@@ -2,13 +2,14 @@ library(tidyverse)
 library(ggplot2)
 library(clessnverse)
 library(forcats)
+library(patchwork)
 
 
 
 # Loading datasets --------------------------------------------------------
 
-data_media <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/dict_media.rds")
-data_tweets <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/Data/dict_tweets.rds")
+data_media <- readRDS("//Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/william/dict_media_final.rds")
+data_tweets <- readRDS("/Users/jeremiedrouin/Dropbox/Travail/Universite_Laval/CLESSN/Publications/article_twitter-elxn22/_SharedFolder_article_twitter-elxn22/william/dict_tweets.rds")
 
 
 ##### Random checkup pour valider les dicos
@@ -71,8 +72,8 @@ percentage_tweets_long <- percentage_tweets_long %>%
   mutate_if(is.numeric, round)
 
 # Create a bar plot using ggplot2
-ggplot(percentage_tweets_long, aes(x = reorder(variable, percentage), y= percentage, fill = variable)) +
-  geom_bar(stat = "identity", position = "dodge") +
+tweets_plot <- ggplot(percentage_tweets_long, aes(x = reorder(variable, percentage), y= percentage, fill = variable)) +
+  geom_bar(stat = "identity", fill="blue" ) +
   labs(title = "",
        x = "",
        y = "Percentage") +
@@ -132,8 +133,8 @@ percentage_media_long <- percentage_media_long %>%
   mutate_if(is.numeric, round)
 
 # Create a bar plot using ggplot2
-ggplot(percentage_media_long, aes(x = reorder(variable, percentage), y= percentage, fill = variable)) +
-  geom_bar(stat = "identity", position = "dodge") +
+media_plot <- ggplot(percentage_media_long, aes(x = reorder(variable, percentage), y= percentage, fill = variable)) +
+  geom_bar(stat = "identity", fill="red") +
   labs(title = "",
        x = "",
        y = "Percentage") +
@@ -144,6 +145,33 @@ ggplot(percentage_media_long, aes(x = reorder(variable, percentage), y= percenta
         axis.title.y = element_text(size=20))
 
 ggsave("_SharedFolder_article_twitter-elxn22/graphs/media_prop.png", height= 10, width= 15)
+
+#### Combine the barplots####
+
+# Combine your dataframes
+combined_data <- rbind(percentage_media_long, percentage_tweets_long)
+combined_data$type <- rep(c("Media", "Tweets"), each = nrow(percentage_media_long))
+
+# Plot the combined data with grouped bars
+ggplot(combined_data, aes(x = variable, y = percentage, fill = type)) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.7) +
+  labs(title = "",
+       x = "",
+       y = "Percentage") +
+  geom_text(aes(label = percentage), position = position_dodge(width = 0.7), vjust = -0.25, size = 7) +
+  scale_fill_manual(values = c("red", "blue")) +
+  theme_clean_light() +
+  theme(legend.position = "top",
+        legend.text = element_text(size = 20),  # Adjust the size of legend text
+        legend.title = element_text(size = 20),
+        axis.text.x= element_text(angle=45, hjust = 1, size=20),
+        axis.title.y = element_text(size=20)) +  # Adjust the size of legend title
+  guides(fill = guide_legend(title = "Type")) 
+
+ggsave("_SharedFolder_article_twitter-elxn22/graphs/barplot.png", height= 10, width= 15)
+  
+
+# Combine the plots using patchwork
 
 
 

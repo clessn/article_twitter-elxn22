@@ -153,13 +153,13 @@ combined_data <- rbind(percentage_media_long, percentage_tweets_long)
 combined_data$type <- rep(c("Media", "Tweets"), each = nrow(percentage_media_long))
 
 # Plot the combined data with grouped bars
-ggplot(combined_data, aes(x = variable, y = percentage, fill = type)) +
+ggplot(combined_data, aes(x = reorder(variable, percentage), y = percentage, fill = type)) +
   geom_bar(stat = "identity", position = "dodge", width = 0.7) +
   labs(title = "",
        x = "",
        y = "Percentage") +
   geom_text(aes(label = percentage), position = position_dodge(width = 0.7), vjust = -0.25, size = 7) +
-  scale_fill_manual(values = c("red", "blue")) +
+  scale_fill_manual(values = c("#F4007E", "#4F16F2")) +
   theme_clean_light() +
   theme(legend.position = "top",
         legend.text = element_text(size = 20),  # Adjust the size of legend text

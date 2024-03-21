@@ -1,0 +1,82 @@
+\begin{table}
+\centering
+\begin{tabular}[t]{lccccccccccccccc}
+\toprule
+  & macroeconomics & healthcare & agriculture & labour & immigration & environment & energy & transportation & crime & culture & aboriginal & religion & education & cost\_life & langue\_fran\\
+\midrule
+(Intercept) & \num{0.12}** & \num{0.04} & \num{0.03}** & \num{0.09}*** & \num{0.01} & \num{0.08}*** & \num{0.02}** & \num{0.15}*** & \num{0.12}*** & \num{0.02}** & \num{0.00} & \num{0.00} & \num{0.10}*** & \num{0.01}*** & \num{0.04}*\\
+ & (\num{0.04}) & (\num{0.03}) & (\num{0.01}) & (\num{0.02}) & (\num{0.01}) & (\num{0.02}) & (\num{0.01}) & (\num{0.04}) & (\num{0.02}) & (\num{0.01}) & (\num{0.01}) & (\num{0.00}) & (\num{0.02}) & (\num{0.00}) & (\num{0.02})\\
+count\_any\_tweet\_macroeconomics & \num{0.00} &  &  &  &  &  &  &  &  &  &  &  &  &  & \\
+ & (\num{0.00}) &  &  &  &  &  &  &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_macroeconomics & \num{0.02} &  &  &  &  &  &  &  &  &  &  &  &  &  & \\
+ & (\num{0.03}) &  &  &  &  &  &  &  &  &  &  &  &  &  & \\
+time\_trend & \num{0.00} & \num{0.00}+ & \num{0.00} & \num{0.00} & \num{0.00}** & \num{0.00} & \num{0.00} & \num{0.00} & \num{0.00}** & \num{0.00} & \num{0.00}* & \num{0.00}*** & \num{0.00} & \num{0.00} & \num{0.00}\\
+ & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00}) & (\num{0.00})\\
+count\_any\_tweet\_healthcare &  & \num{0.01}** &  &  &  &  &  &  &  &  &  &  &  &  & \\
+ &  & (\num{0.00}) &  &  &  &  &  &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_healthcare &  & \num{0.02} &  &  &  &  &  &  &  &  &  &  &  &  & \\
+ &  & (\num{0.02}) &  &  &  &  &  &  &  &  &  &  &  &  & \\
+count\_any\_tweet\_agriculture &  &  & \num{0.00}* &  &  &  &  &  &  &  &  &  &  &  & \\
+ &  &  & (\num{0.00}) &  &  &  &  &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_agriculture &  &  & \num{0.00} &  &  &  &  &  &  &  &  &  &  &  & \\
+ &  &  & (\num{0.01}) &  &  &  &  &  &  &  &  &  &  &  & \\
+count\_any\_tweet\_labour &  &  &  & \num{0.00} &  &  &  &  &  &  &  &  &  &  & \\
+ &  &  &  & (\num{0.00}) &  &  &  &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_labour &  &  &  & \num{0.01} &  &  &  &  &  &  &  &  &  &  & \\
+ &  &  &  & (\num{0.02}) &  &  &  &  &  &  &  &  &  &  & \\
+count\_any\_tweet\_immigration &  &  &  &  & \num{0.01}* &  &  &  &  &  &  &  &  &  & \\
+ &  &  &  &  & (\num{0.00}) &  &  &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_immigration &  &  &  &  & \num{0.01} &  &  &  &  &  &  &  &  &  & \\
+ &  &  &  &  & (\num{0.01}) &  &  &  &  &  &  &  &  &  & \\
+count\_any\_tweet\_environment &  &  &  &  &  & \num{0.00}** &  &  &  &  &  &  &  &  & \\
+ &  &  &  &  &  & (\num{0.00}) &  &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_environment &  &  &  &  &  & \num{-0.04}* &  &  &  &  &  &  &  &  & \\
+ &  &  &  &  &  & (\num{0.02}) &  &  &  &  &  &  &  &  & \\
+count\_any\_tweet\_energy &  &  &  &  &  &  & \num{0.00}* &  &  &  &  &  &  &  & \\
+ &  &  &  &  &  &  & (\num{0.00}) &  &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_energy &  &  &  &  &  &  & \num{0.01} &  &  &  &  &  &  &  & \\
+ &  &  &  &  &  &  & (\num{0.01}) &  &  &  &  &  &  &  & \\
+count\_any\_tweet\_transportation &  &  &  &  &  &  &  & \num{0.00} &  &  &  &  &  &  & \\
+ &  &  &  &  &  &  &  & (\num{0.00}) &  &  &  &  &  &  & \\
+ind\_any\_party\_release\_transportation &  &  &  &  &  &  &  & \num{0.00} &  &  &  &  &  &  & \\
+ &  &  &  &  &  &  &  & (\num{0.03}) &  &  &  &  &  &  & \\
+count\_any\_tweet\_crime &  &  &  &  &  &  &  &  & \num{0.00}+ &  &  &  &  &  & \\
+ &  &  &  &  &  &  &  &  & (\num{0.00}) &  &  &  &  &  & \\
+ind\_any\_party\_release\_crime &  &  &  &  &  &  &  &  & \num{0.01} &  &  &  &  &  & \\
+ &  &  &  &  &  &  &  &  & (\num{0.01}) &  &  &  &  &  & \\
+count\_any\_tweet\_culture &  &  &  &  &  &  &  &  &  & \num{0.00} &  &  &  &  & \\
+ &  &  &  &  &  &  &  &  &  & (\num{0.00}) &  &  &  &  \vphantom{1} & \\
+ind\_any\_party\_release\_culture &  &  &  &  &  &  &  &  &  & \num{0.00} &  &  &  &  & \\
+ &  &  &  &  &  &  &  &  &  & (\num{0.00}) &  &  &  &  & \\
+count\_any\_tweet\_aboriginal &  &  &  &  &  &  &  &  &  &  & \num{0.00} &  &  &  & \\
+ &  &  &  &  &  &  &  &  &  &  & (\num{0.01}) &  &  &  \vphantom{1} & \\
+ind\_any\_party\_release\_aboriginal &  &  &  &  &  &  &  &  &  &  & \num{0.00} &  &  &  & \\
+ &  &  &  &  &  &  &  &  &  &  & (\num{0.01}) &  &  &  & \\
+count\_any\_tweet\_religion &  &  &  &  &  &  &  &  &  &  &  & \num{0.00} &  &  & \\
+ &  &  &  &  &  &  &  &  &  &  &  & (\num{0.00}) &  &  \vphantom{1} & \\
+ind\_any\_party\_release\_religion &  &  &  &  &  &  &  &  &  &  &  & \num{0.00} &  &  & \\
+ &  &  &  &  &  &  &  &  &  &  &  & (\num{0.00}) &  &  & \\
+count\_any\_tweet\_education &  &  &  &  &  &  &  &  &  &  &  &  & \num{0.00} &  & \\
+ &  &  &  &  &  &  &  &  &  &  &  &  & (\num{0.01}) &  & \\
+ind\_any\_party\_release\_education &  &  &  &  &  &  &  &  &  &  &  &  & \num{-0.03}+ &  & \\
+ &  &  &  &  &  &  &  &  &  &  &  &  & (\num{0.02}) &  & \\
+count\_any\_tweet\_cost\_life &  &  &  &  &  &  &  &  &  &  &  &  &  & \num{0.00}+ & \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  & (\num{0.00}) \vphantom{1} & \\
+ind\_any\_party\_release\_cost\_life &  &  &  &  &  &  &  &  &  &  &  &  &  & \num{0.00} & \\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  & (\num{0.00}) & \\
+count\_any\_tweet\_langue\_fran &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \num{0.01}***\\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & (\num{0.00})\\
+ind\_any\_party\_release\_langue\_fran &  &  &  &  &  &  &  &  &  &  &  &  &  &  & \num{0.02}\\
+ &  &  &  &  &  &  &  &  &  &  &  &  &  &  & (\num{0.01})\\
+\midrule
+Num.Obs. & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36} & \num{36}\\
+R2 & \num{0.139} & \num{0.290} & \num{0.179} & \num{0.042} & \num{0.435} & \num{0.315} & \num{0.208} & \num{0.074} & \num{0.280} & \num{0.062} & \num{0.126} & \num{0.346} & \num{0.125} & \num{0.157} & \num{0.362}\\
+R2 Adj. & \num{0.059} & \num{0.223} & \num{0.102} & \num{-0.048} & \num{0.382} & \num{0.251} & \num{0.134} & \num{-0.013} & \num{0.212} & \num{-0.026} & \num{0.044} & \num{0.284} & \num{0.043} & \num{0.078} & \num{0.302}\\
+AIC & \num{-120.0} & \num{-112.2} & \num{-169.2} & \num{-157.6} & \num{-190.7} & \num{-149.7} & \num{-195.6} & \num{-110.2} & \num{-139.8} & \num{-199.9} & \num{-154.0} & \num{-273.9} & \num{-122.6} & \num{-318.0} & \num{-138.5}\\
+BIC & \num{-113.6} & \num{-105.8} & \num{-162.8} & \num{-151.3} & \num{-184.4} & \num{-143.4} & \num{-189.3} & \num{-103.9} & \num{-133.4} & \num{-193.6} & \num{-147.6} & \num{-267.5} & \num{-116.3} & \num{-311.7} & \num{-132.1}\\
+RMSE & \num{0.04} & \num{0.05} & \num{0.02} & \num{0.02} & \num{0.02} & \num{0.03} & \num{0.01} & \num{0.05} & \num{0.03} & \num{0.01} & \num{0.03} & \num{0.00} & \num{0.04} & \num{0.00} & \num{0.03}\\
+Std.Errors & IID & IID & IID & IID & IID & IID & IID & IID & IID & IID & IID & IID & IID & IID & IID\\
+\bottomrule
+\multicolumn{16}{l}{\rule{0pt}{1em}+ p $<$ 0.1, * p $<$ 0.05, ** p $<$ 0.01, *** p $<$ 0.001}\\
+\end{tabular}
+\end{table}

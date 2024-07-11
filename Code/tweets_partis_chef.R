@@ -74,7 +74,7 @@ get_party_tweets <- function(begin_date, end_date){
   return(tweets_politicians)
 }
 
-party_tweets <- get_party_tweets("2022-08-01", "2022-11-01")
+party_tweets <- get_party_tweets("2022-06-11", "2022-10-03")
 
 #### Get politicians Tweet ####
 
@@ -87,10 +87,12 @@ get_politicians_tweets <- function(begin_date, end_date){
   tweets_politicians <- clessnhub::get_items('tweets', myfilter, 
                                              download_data = TRUE)
   tictoc::toc()
-  return(tweets_politicians)
+  return(tweets_politicians) %>% 
+    filter(metadata.twitterHandle %in% c("francoislegault", "GNadeauDubois", 
+                                         "PaulPlamondon", "E_Duhaime", "DomAnglade"))
 }
 
-politicians_tweets <- get_politicians_tweets("2022-08-01", "2022-11-01")
+politicians_tweets <- get_politicians_tweets("2022-06-11", "2022-08-27")
 
 
 #### Create a clean dataframe containing the relevant variables ####
@@ -98,14 +100,12 @@ politicians_tweets <- get_politicians_tweets("2022-08-01", "2022-11-01")
 CleanDataChefs <- politicians_tweets %>% 
   select(data.creationDate, data.creationTime, data.likeCount, metadata.twitterHandle, 
          data.retweetCount, data.text, type, data.mentions) %>% 
-  filter(metadata.twitterHandle %in% c("francoislegault", "GNadeauDubois", 
-                                       "PaulPlamondon", "E_Duhaime", "DomAnglade"))
+  filter(metadata.twitterHandle %in% c("E_Duhaime"))
 
 CleanDataParty <- party_tweets %>% 
   select(data.creationDate, data.creationTime, data.likeCount, metadata.twitterHandle, 
          data.retweetCount, data.text, type, data.mentions) %>% 
-  filter(metadata.twitterHandle %in% c("@QuebecSolidaire", "@coalitionavenir", 
-                                       "@LiberalQuebec", "@partiquebecois",
+  filter(metadata.twitterHandle %in% c(
                                        "@PconservateurQc"))
 
 ### Bind the dataframes to create data for topic modeling ###
